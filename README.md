@@ -65,3 +65,18 @@ sudo apt install gtkwave
 
   
   
+  
+  
+  
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
