@@ -1,24 +1,24 @@
  # **# VSD-HDP-Manhattan-Project**
 > -  Inspired by J.R.Oppenheimer
 
+
 ## Table of Contents
 
 + [ Tools installation][1]
 
-1. Yosys
-2. iverilog
-3. gtkwave
+1. [Yosys](#####%20<u>Yosys</u>)
+2. [iverilog](#markdigsyntaxinlineshtmlinlineiverilogmarkdigsyntaxinlineshtmlinline)
+3. [gtkwave](#markdigsyntaxinlineshtmlinlinegtkwavemarkdigsyntaxinlineshtmlinline)
 
-
-
-
-
+&nbsp;
+&nbsp;
 
 
 
  ## Tools installation 
+   [1]: #tools-installation
 
-<u>Yosys</u>
+##### <u>Yosys</u>
 
 
 
@@ -34,7 +34,34 @@ $ make
 $ sudo make install
 ~~~
 
-  [1]: #tools-installation
+&nbsp;
+&nbsp;
   
+#### <u>iverilog</u>
+
+```
+sudo apt-get install iverilog
+```
+
+![](file:///D:/hdp/Screenshot%20from%202023-07-23%2014-14-12.png)
+&nbsp;
+&nbsp;
+
+
+#### <u>gtkwave</u>
+
+```
+sudo apt update
+sudo apt install gtkwave
+```
+
+![](file:///D:/hdp/Screenshot%20from%202023-07-23%2014-15-44.png)
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+
+
   
   
