@@ -71,7 +71,7 @@ sudo apt install gtkwave
 <br>
 <details>
 <summary>Short Summary</summary>
-&nbsp;
+
 The Purpose of this is to know the basic idea about the different tools in flow and use the good_mux.v to verify the functionality in iverilog by giving the stimulus and code we get the .vcd file to view in the gtkwave and next id to generate the netlist using the yosys tool . The Design and the Liberty file are given to the tool to generate the netlist using the skywater 130 Standard cell Library.
 </details>
 &nbsp;
@@ -80,32 +80,32 @@ The Purpose of this is to know the basic idea about the different tools in flow 
 
 <details>
 <summary>Source Files:</summary>
-&nbsp;
+
 The verilog Codes and Liberty files are available using this repo 
 https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
-&nbsp;
+
 
 I have used good_mux.v which is simple mux to verify its functionality in iverilog and gtkwave.
+
+
 <br>
 </details>
 
 &nbsp;
 <details>
 <summary>Simulation :</summary>
-&nbsp;
-These are following commands used to simulate view waveforms 
 
+These are following commands used to simulate view waveforms 
 
 ```
 iverilog <name verilog: good_mux.v> <name testbench: tb_good_mux.v>
 ./a.out
 gtkwave tb_good_mux.vcd
 ```
-&nbsp;
-![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\gtkwave.png)
-
+![](images/gtkwave.png)
 <br>
 </details>
+
 
 <details>
 <summary>Synthesis aka Yosys :</summary>
@@ -118,16 +118,14 @@ yosys> synth -top <top_module_name>
 yosys> abc -liberty <path to lib file>
 yosys> show
 ```
-&nbsp;
+![](images/synthesis.png)
 
-![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\synthesis.png)
 following Commands are used to generate the netlist
 ```
 yosys> write_verilog <file_name_netlist.v>
 yosys> write_verilog -noattr <file_name_netlist.v>
 ```
-&nbsp;
-![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\netlist.png)
-
+![](images/netlist.png)
 <br>
 </details>
+
