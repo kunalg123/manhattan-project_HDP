@@ -34,13 +34,8 @@ $ make
 $ sudo make install
 ~~~
 &nbsp;
-<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-05-07.png)
 
-=======
-
-![](Screenshot%20from%202023-07-23%2014-05-07.png)
->>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 
 &nbsp;
 &nbsp;
@@ -51,12 +46,8 @@ $ sudo make install
 sudo apt-get install iverilog
 ```
 
-<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-14-12.png)
 
-=======
-![](Screenshot%20from%202023-07-23%2014-14-12.png)
->>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 &nbsp;
 &nbsp;
 
@@ -68,33 +59,75 @@ sudo apt update
 sudo apt install gtkwave
 ```
 
-<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-15-44.png)
 
-=======
-![](Screenshot%20from%202023-07-23%2014-15-44.png)
->>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 &nbsp;
 &nbsp;
 &nbsp;
 
 
+<details>
+<summary>Day 1</summary>
+<br>
+<details>
+<summary>Short Summary</summary>
+&nbsp;
+The Purpose of this is to know the basic idea about the different tools in flow and use the good_mux.v to verify the functionality in iverilog by giving the stimulus and code we get the .vcd file to view in the gtkwave and next id to generate the netlist using the yosys tool . The Design and the Liberty file are given to the tool to generate the netlist using the skywater 130 Standard cell Library.
+</details>
+&nbsp;
+&nbsp;
+&nbsp;
+
+<details>
+<summary>Source Files:</summary>
+&nbsp;
+The verilog Codes and Liberty files are available using this repo 
+https://github.com/kunalg123/sky130RTLDesignAndSynthesisWorkshop.git
+&nbsp;
+
+I have used good_mux.v which is simple mux to verify its functionality in iverilog and gtkwave.
+<br>
+</details>
+
+&nbsp;
+<details>
+<summary>Simulation :</summary>
+&nbsp;
+These are following commands used to simulate view waveforms 
 
 
-  
-  
-  
-  
-  
+```
+iverilog <name verilog: good_mux.v> <name testbench: tb_good_mux.v>
+./a.out
+gtkwave tb_good_mux.vcd
+```
+&nbsp;
+![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\gtkwave.png)
 
+<br>
+</details>
 
+<details>
+<summary>Synthesis aka Yosys :</summary>
+Follow the commands to synthesize the design to get the design view.
 
+```
+yosys> read_liberty -lib <path to lib file>
+yosys> read_verilog <path to verilog file>
+yosys> synth -top <top_module_name>
+yosys> abc -liberty <path to lib file>
+yosys> show
+```
+&nbsp;
 
-  
-  
-  
-  
-  
-  
-  
-  
+![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\synthesis.png)
+following Commands are used to generate the netlist
+```
+yosys> write_verilog <file_name_netlist.v>
+yosys> write_verilog -noattr <file_name_netlist.v>
+```
+&nbsp;
+![](file:///C:\Users\Sai%20Teja%20Sharma\Documents\manhattan-project_HDP-main\images\netlist.png)
+
+<br>
+</details>
