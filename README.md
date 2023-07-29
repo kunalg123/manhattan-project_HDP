@@ -34,8 +34,13 @@ $ make
 $ sudo make install
 ~~~
 &nbsp;
+<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-05-07.png)
 
+=======
+
+![](Screenshot%20from%202023-07-23%2014-05-07.png)
+>>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 
 &nbsp;
 &nbsp;
@@ -46,8 +51,12 @@ $ sudo make install
 sudo apt-get install iverilog
 ```
 
+<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-14-12.png)
 
+=======
+![](Screenshot%20from%202023-07-23%2014-14-12.png)
+>>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 &nbsp;
 &nbsp;
 
@@ -59,8 +68,12 @@ sudo apt update
 sudo apt install gtkwave
 ```
 
+<<<<<<< HEAD
 ![](images/Screenshot%20from%202023-07-23%2014-15-44.png)
 
+=======
+![](Screenshot%20from%202023-07-23%2014-15-44.png)
+>>>>>>> aea580dd05fb7cd26a55b52a8b1e2c63db17d9de
 &nbsp;
 &nbsp;
 &nbsp;
