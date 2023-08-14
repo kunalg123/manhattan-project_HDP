@@ -686,3 +686,170 @@ yosys> show
 ![](images/day3/counteropt2.png)
 
 </details>
+
+### Day 4
+
+<details>
+
+<summary>Short Summary</summary>
+
+The main purpose is to learn about the Gate Level Simulation known as Post-synthesis Simulation to verify the functionality and Logical correctness  of Circuit is same as the pre-synthesis model. 
+
+![](images/day%204/WhatsApp%20Image%202023-08-14%20at%2012.54.00%20PM.jpeg)
+
+![](images/day%204/WhatsApp%20Image%202023-08-14%20at%2012.54.00%20PM%20(1).jpeg)
+
+![](images/day%204/WhatsApp%20Image%202023-08-14%20at%2012.54.00%20PM%20(2).jpeg)
+
+</details>
+
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of ternary_operator_mux.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: ternary_operator_mux.v> <name testbench: tb_ternary_operator_mux.v>
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+![](images/day%204/ternary.png)
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: ternary_operator_mux.v>
+yosys> synth -top <name: ternary_operator_mux>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr <name of netlist: ternary_operator_mux_net.v>
+yosys> show
+```
+
+
+![](images/day%204/ternary1.png)
+
+![](images/day%204/ternary%20operatornetlist.png)
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to sky130_fd_sc_hd__tt_025C_1v80.lib: ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib> <name netlist: ternary_operator_mux_net.v> <name testbench: tb_ternary_operator_mux.v>
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+![](images/day%204/glsternary.png)
+
+</details>
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of bad_mux.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: bad_mux.v> <name testbench: tb_bad_mux.v>
+./a.out
+gtkwave tb_bad_mux.vcd
+```
+
+
+![](images/day%204/badmux.png)
+
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: bad_mux.v>
+yosys> synth -top <name: bad_mux>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr <name of netlist: bad_mux_net.v>
+yosys> show
+```
+
+
+![](images/day%204/badmux1.png)
+
+![](images/day%204/badmuxnetlist.png)
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to sky130_fd_sc_hd__tt_025C_1v80.lib: ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib> <name netlist: ternary_operator_mux_net.v> <name testbench: tb_ternary_operator_mux.v>
+./a.out
+gtkwave tb_ternary_operator_mux.vcd
+```
+
+
+![](images/day%204/glsbadmux.png)
+
+
+</details>
+
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of blocking  
+_caveat.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: blocking_caveat.v> <name testbench: tb_blocking_caveat.v>
+./a.out
+gtkwave tb_blocking_caveat.vdc
+```
+
+
+![](images/day%204/blockcleat.png)
+
+
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: blocking_caveat.v>
+yosys> synth -top <name: blocking_caveat>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr <name of netlist: blocking_caveat_net.v>
+yosys> show
+```
+
+
+
+![](images/day%204/blockcleat.png)
+
+![](images/day%204/blockcnetlist.png)
+
+
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to verilog model: ../mylib/verilog_model/sky130_fd_sc_hd.v> <name netlist: blocking_caveat_net.v> <name testbench: tb_blocking_caveat.v>
+./a.out
+gtkwave tb_blocking_caveat.vcd
+```
+
+
+
+![](images/day%204/glsblockigc.png)
+
+
+
+</details>
