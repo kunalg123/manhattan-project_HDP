@@ -316,7 +316,7 @@ Here there no special cells are used to synthesize the design because it doesnt 
 <br>
 </details>
 
-### DAY 3
+### Day 3
 
 
 <details>
@@ -695,6 +695,8 @@ yosys> show
 
 The main purpose is to learn about the Gate Level Simulation known as Post-synthesis Simulation to verify the functionality and Logical correctness  of Circuit is same as the pre-synthesis model. 
 
+![](images/day%204/Screenshot%202023-08-14%20112419.png)
+
 ![](images/day%204/WhatsApp%20Image%202023-08-14%20at%2012.54.00%20PM.jpeg)
 
 ![](images/day%204/WhatsApp%20Image%202023-08-14%20at%2012.54.00%20PM%20(1).jpeg)
@@ -808,7 +810,7 @@ The Following commands are used to simulate the design
 ```
 iverilog <name verilog: blocking_caveat.v> <name testbench: tb_blocking_caveat.v>
 ./a.out
-gtkwave tb_blocking_caveat.vdc
+gtkwave tb_blocking_caveat.vcd
 ```
 
 
@@ -850,6 +852,420 @@ gtkwave tb_blocking_caveat.vcd
 
 ![](images/day%204/glsblockigc.png)
 
+</details>
+
+### Day 5
+
+<details>
+
+<summary>Short Summary</summary>
+
+
+The main purpose is to learn about the different constructs or looping  statements like if , case , for , generate are used in the design . To know about the caveats of it like improper coding style , missing blocks can leads to "inferred Latch " in the design.
+
+![](images/day5/WhatsApp%20Image%202023-08-15%20at%206.13.06%20PM.jpeg)
+
+![](images/day5/WhatsApp%20Image%202023-08-15%20at%206.13.06%20PM%20(1).jpeg)
+
+![](images/day5/WhatsApp%20Image%202023-08-15%20at%206.13.06%20PM%20(2).jpeg)
+
+![](images/day5/WhatsApp%20Image%202023-08-15%20at%206.13.06%20PM%20(3).jpeg)
+
+</details>
+
+<details>
+
+<summary> simulation , Synthesis, of incomp_if.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: incomp_if.v> <name testbench: tb_incomp_if.v>
+./a.out
+gtkwave tb_incomp_if.vcd
+```
+
+
+![](images/day5/incompif.png)
+
+
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: incomp_if.v>
+yosys> synth -top <name: incomp_if>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+
+
+
+![](images/day5/incompif1.png)
 
 
 </details>
+<details>
+
+<summary> simulation , Synthesis, of incomp_if2.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: incomp_if2.v> <name testbench: tb_incomp_if2.v>
+./a.out
+gtkwave tb_incomp_if2.vcd
+```
+
+
+
+![](images/day5/incompif2.png)
+
+
+
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: incomp_if2.v>
+yosys> synth -top <name: incomp_if2>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+
+
+
+![](images/day5/incompif2a.png)
+
+
+
+</details>
+
+<details>
+
+<summary> simulation , Synthesis, of incomp_case.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: incomp_case.v> <name testbench: tb_incomp_case.v>
+./a.out
+gtkwave tb_incomp_case.vcd
+```
+
+
+![](images/day5/incompcase.png)
+
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: incomp_case.v>
+yosys> synth -top <name: incomp_case>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+![](images/day5/incompcasea.png)
+
+</details>
+
+<details>
+
+<summary> simulation , Synthesis, of comp_case.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: comp_case.v> <name testbench: tb_comp_case.v>
+./a.out
+gtkwave tb_comp_case.vcd
+```
+
+
+
+![](images/day5/compcase.png)
+
+
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: comp_case.v>
+yosys> synth -top <name: comp_case>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+
+![](images/day5/compcasea.png)
+
+</details>
+
+<details>
+
+<summary>  Synthesis, of partial_case_assign.v </summary>
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: partial_case_assign.v>
+yosys> synth -top <name: partial_case_assign>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+
+![](images/day5/partialcase.png)
+
+
+</details>
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of bad_case.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: bad_case.v> <name testbench: tb_bad_case.v>
+./a.out
+gtkwave tb_bad_case.vcd
+```
+
+
+
+![](images/day5/badcase.png)
+
+
+
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: bad_case.v>
+yosys> synth -top <name: bad_case>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr bad_case_net.v
+yosys> show
+```
+
+![](images/day5/badcase1.png)
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to verilog model: ../mylib/verilog_model/sky130_fd_sc_hd.v> <name netlist: bad_case_net.v> <name testbench: tb_bad_case.v>
+./a.out
+gtkwave tb_bad_case.vcd
+```
+
+
+![](images/day5/badcasepost.png)
+
+
+</details>
+
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of mux_generate.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: mux_generate.v> <name testbench: tb_mux_generate.v>
+./a.out
+gtkwave tb_mux_generate.vcd
+```
+
+
+
+
+![](images/day5/muxgenerate.png)
+
+
+
+
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: mux_generate.v>
+yosys> synth -top <name: mux_generate>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr mux_generate_net.v
+yosys> show
+```
+
+
+![](images/day5/muxgenerate1.png)
+
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to verilog model: ../mylib/verilog_model/sky130_fd_sc_hd.v> <name netlist: mux_generate_net.v> <name testbench: tb_mux_generate.v>
+./a.out
+gtkwave tb_mux_generate.vcd
+```
+
+
+![](images/day5/muxgeneratepost.png)
+
+
+
+</details>
+<summary> simulation , Synthesis, of demux_case.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: demux_case.v> <name testbench: tb_demux_case.v>
+./a.out
+gtkwave tb_demux_case.vcd
+```
+
+
+
+![](images/day5/demuxcase.png)
+
+
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: demux_case.v>
+yosys> synth -top <name: demux_case>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> show
+```
+
+![](images/day5/demuxcase1.png)
+
+
+</details>
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of demux_generate.v </summary>
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: demux_generate.v> <name testbench: tb_demux_generate.v>
+./a.out
+gtkwave tb_demux_generate.vcd
+```
+
+
+![](images/day5/demuxgenerate.png)
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: demux_generate.v>
+yosys> synth -top <name: demux_generate>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr mux_degenerate_net.v
+yosys> show
+```
+
+
+![](images/day5/demuxgenerate1.png)
+
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to verilog model: ../mylib/verilog_model/sky130_fd_sc_hd.v> <name netlist: demux_generate_net.v> <name testbench: tb_demux_generate.v>
+./a.out
+gtkwave tb_demux_generate.vcd
+```
+
+
+![](images/day5/demuxgeneratepost.png)
+
+</details>
+
+<details>
+
+<summary>pre-synthesis simulation , Synthesis, post-synthesis simulation of rca.v </summary>
+
+
+
+
+
+![](images/day5/WhatsApp%20Image%202023-08-15%20at%206.13.06%20PM%20(4).jpeg)
+
+
+
+The Following commands are used to simulate the design 
+
+```
+iverilog <name verilog: rca.v> <name verilog: fa.v> <name testbench: tb_rca.v>
+./a.out
+gtkwave tb_rca.vcd
+```
+
+
+
+![](images/day5/rca.png)
+
+
+The Following is Pre-synthesis simulation.
+
+Use the following commands to synthesize the design.
+
+```
+yosys> read_liberty -lib <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> read_verilog <name of verilog file: rca.v>
+yosys> read_verilog <name of verilog file: fa.v>
+yosys> synth -top <name: rca>
+yosys> abc -liberty <path to sky130_fd_sc_hd__tt_025C_1v80.lib>
+yosys> write_verilog -noattr rca_net.v
+yosys> show
+```
+
+
+
+![](images/day5/rca1.png)
+
+
+
+
+The Following commands to used to perform Gate level simulation.
+
+```
+iverilog <path to verilog model: ../mylib/verilog_model/primitives.v> <path to verilog model: ../mylib/verilog_model/sky130_fd_sc_hd.v> <name netlist: rca_net.v> <name testbench: tb_rca.v>
+./a.out
+gtkwave tb_rca.vcd
+```
+
+
+![](images/day5/rcapost.png)
+
+
+</details>
+
+
