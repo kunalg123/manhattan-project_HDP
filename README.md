@@ -1128,10 +1128,10 @@ gtkwave tb_mux_generate.vcd
 
 ![](images/day5/muxgeneratepost.png)
 
-
-
 </details>
+<details>
 <summary> simulation , Synthesis, of demux_case.v </summary>
+
 
 The Following commands are used to simulate the design 
 
@@ -1205,8 +1205,10 @@ gtkwave tb_demux_generate.vcd
 
 
 ![](images/day5/demuxgeneratepost.png)
-
 </details>
+
+
+
 
 <details>
 
