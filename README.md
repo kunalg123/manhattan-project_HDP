@@ -61,6 +61,18 @@ sudo apt install gtkwave
 
 ![](images/Screenshot%20from%202023-07-23%2014-15-44.png)
 
+
+#### <u>OpenSTA</u>
+```plaintext
+sudo apt-get install cmake clang gcctcl swig bison flex
+git clone https://github.com/The-OpenROAD-Project/OpenSTA.git
+cd OpenSTA
+mkdir build
+cd build
+cmake ..
+make
+```
+
 &nbsp;
 &nbsp;
 &nbsp;
@@ -1665,6 +1677,160 @@ list_attributes -app > <name: a>
 ```
 
 </details>
+
+
+### Day 8 
+
+
+<details>
+<summary>Summary</summary>
+
+Here we have learnt to write sdc ( synopsys design constraints) for the design . There are lot constraints for clock , input ,output , internal paths, combinational paths.
+
+
+
+![](images/day8/asic.png)
+
+![](images/day8/2.png)
+
+</details>
+
+
+<details>
+<summary>Clock modeling and SDC generation</summary>
+
+![](images/day8/Day8_230828_184009_2.jpg)
+
+
+![](images/day8/Day8_230828_184009_3.jpg)
+
+
+![](images/day8/Day8_230828_184009_4.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_5.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_6.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_8.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_9.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_10.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_11.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_12.jpg)
+
+
+![](images/day8/Day8_230828_184009_13.jpg)
+
+
+![](images/day8/Day8_230828_184009_14.jpg)
+
+
+
+![](images/day8/Day8_230828_184009_15.jpg)
+
+
+![](images/day8/Day8_230828_184009_16.jpg)
+
+
+![](images/day8/Day8_230828_184009_17.jpg)
+
+</details>
+
+
+
+### Day 9
+
+
+<details>
+<summary>Summary</summary>
+
+I have written constraints for my design named it as manhattanseq_constraints.sdc to run opensta tool get the timing reports and manhattanscript.tcl to automate flow in opensta tool.
+
+</details>
+
+<details>
+<summary>Constraints to my design </summary>
+
+
+```plaintext
+
+#clock constraints
+create_clock -name clk1 -period 10 [get_ports clock] 
+set_clock_latency -source 1 [get_clocks clk1]
+set_clock_latency 2 [get_clocks clk1]
+set_clock_uncertainty 0.6 [get_clocks clk1]
+set_clock_uncertainty 0.1 [get_clocks clk1]
+
+#input constraints
+#set_driving_cell -lib_cell sky130_fd_sc_hd__buf_4 [all_inputs]
+set_input_transition -max 0.4 [get_ports sequence_in]
+set_input_transition -min 0.2 [get_ports sequence_in]
+set_input_transition -max 0.4 [get_ports reset]
+set_input_transition -max 0.2 [get_ports reset]
+set_input_delay -max 3 -clock  clk1  [get_ports sequence_in]
+set_input_delay -min 1 -clock  clk1  [get_ports sequence_in]
+set_input_delay -max 3 -clock clk1   [get_ports reset]
+set_input_delay -min 1 -clock  clk1 [get_ports reset]
+
+#output constraints 
+set_output_delay -max 3 -clock clk1 [get_ports detector_out]
+set_output_delay -min 1  -clock  clk1 [get_ports detector_out]
+set_load  -max 0.2 [get_ports detector_out]
+set_load -min 0.05 [get_ports detector_out]
+```
+
+</details>
+
+<details>
+<summary>Insights of manhattanscript.tcl </summary>
+
+```plaintext
+read_liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+
+read_verilog manhattan_sequencedetector_net.v
+
+link_design manhattan_sequencedetector
+
+read_sdc manhattanseq_constraints.sdc
+
+report_checks -fields {nets cap slew input_pins} -digits {5} > manhattan_timing.rpt
+```
+To run this script in opensta , we use this command 
+```plaintext
+sta manhattanscript.tcl
+```
+
+</details>
+
+
+<details>
+<summary>Timing reports </summary>
+
+
+![](images/day8/Screenshot%202023-08-28%20220516.png)
+
+
+</details>
+
+
+
 
 
 
