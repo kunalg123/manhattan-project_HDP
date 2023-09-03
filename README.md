@@ -1,26 +1,10 @@
  # **# VSD-HDP-Manhattan-Project**
 > -  Inspired by J.R.Oppenheimer
 
-
-## Table of Contents
-
-+ [ Tools installation][1]
-
-1. [Yosys](#####%20<u>Yosys</u>)
-2. [iverilog](#markdigsyntaxinlineshtmlinlineiverilogmarkdigsyntaxinlineshtmlinline)
-3. [gtkwave](#markdigsyntaxinlineshtmlinlinegtkwavemarkdigsyntaxinlineshtmlinline)
-
-&nbsp;
-&nbsp;
-
-
-
  ## Tools installation 
    [1]: #tools-installation
 
 ##### <u>Yosys</u>
-
-
 
 ~~~
 $ git clone https://github.com/YosysHQ/yosys.git
@@ -74,6 +58,24 @@ make
 ```
 
 ![](images/day8/stas.png)
+
+#### <u>ngspice</u>
+
+https://sourceforge.net/projects/ngspice/files/ use this link to get the latest version ngspice file in my case its version 41 then follow the commands to extraxt and install the tool.
+
+```plaintext
+tar -zxvf ngspice-41_64.tar.gz
+cd ngspice-41
+mkdir release
+cd release
+../configure  --with-x --with-readline=yes --disable-debug
+make
+sudo make install
+```
+
+
+![](images/day10/2.png)
+
 
 
 &nbsp;
@@ -1837,11 +1839,81 @@ sta manhattanscript.tcl
 
 </details>
 
+### Day 10 
+
+<details>
+<summary> Summary </summary>
+
+Here we are going to discuss of mos charactersitcs like Ids vs Vds , and all parameters related to it . Spice File are most important in delay analysis which gives all information  about the delay which used in Post CTS .
+</details>
+
+<details>
+<summary> Intro. to SPICE </summary>
 
 
+![](images/day10/Day%2010_230902_195133_1.jpg)
+
+![](images/day10/Day%2010_230902_195133_2.jpg)
+
+![](images/day10/Day%2010_230902_195133_3.jpg)
+
+![](images/day10/Day%2010_230902_195133_4.jpg)
+
+![](images/day10/Day%2010_230902_195133_5.jpg)
+
+![](images/day10/Day%2010_230902_195133_6.jpg)
+
+![](images/day10/Day%2010_230902_195133_7.jpg)
+
+![](images/day10/Day%2010_230902_195133_8.jpg)
+
+![](images/day10/Day%2010_230902_195133_9.jpg)
+
+</details>
+
+<details>
+<summary> SPICE Syntax  </summary>
+
+Following are the spice syntax file given to tools for simulation.
 
 
+```plaintext
+.LIB "<name: xxx>.mod" CMOS_MODELS
+R<name> <1st node> <second node> <value>
+M<name> <drain> <gate> <source> <bulk> <name in tech file> w=<value> L=<value>
+V<name> <1st node> <second node> <value>
+C<name> <1st node> <second node> <value>
+```
+
+```plaintext
+.lib cmos_models
+.Model <name that should match in netlist> NMOS (TOX = .. VTH0 = .. U0 = .. GAMMA1 = ..)
+.Model <name that should match in netlist> PMOS (TOX = .. VTH0 = .. U0 = .. GAMMA1 = ..)
+.endl
+```
+
+```plaintext
+.<mode: dc> <voltage node to sweep: Vin> <start value: 0> <end value: 2.5> <steps: 0.1> <voltage node to sweep: Vdd> <start value: 0> <end value: 2.5> <steps: 2.5>
+```
 
 
+ngspice tool is used to view the simulation and follw the commands to get the output.
 
+```plaintext
+ngspice <spice file name>
+plot -<name node>
+```
 
+</details>
+
+<details>
+<summary> SPICE Simulation : Lab 1  </summary>
+
+```plaintext
+ngspice <name: day1_nfet_idvds_L2_W5.spice>
+plot -<name: vdd#branch>
+```
+
+![](images/day10/1.png)
+
+</details>
