@@ -1917,3 +1917,68 @@ plot -<name: vdd#branch>
 ![](images/day10/1.png)
 
 </details>
+
+
+### Day 11 
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going learn more about the mos charactersitcs.
+</details>
+
+<details>
+<summary> Theory  </summary>
+
+
+![](images/day%2011/day%2011_230903_192935_1.jpg)
+
+![](images/day%2011/day%2011_230903_192935_2.jpg)
+
+![](images/day%2011/day%2011_230903_192935_3.jpg)
+
+![](images/day%2011/day%2011_230903_192935_4.jpg)
+
+![](images/day%2011/day%2011_230903_192935_5.jpg)
+
+![](images/day%2011/day%2011_230903_192935_6.jpg)
+
+![](images/day%2011/day%2011_230903_192935_7.jpg)
+
+![](images/day%2011/day%2011_230903_192935_8.jpg)
+
+![](images/day%2011/day%2011_230903_192935_9.jpg)
+
+</details>
+
+
+<details>
+<summary> Spice Simulation : Lab 2a  </summary>
+
+
+```plaintext
+ngspice <name: day2_nfet_idvds_L015_W039.spice>
+plot -<name: vdd#branch>
+```
+
+
+![](images/day%2011/Screenshot%20from%202023-09-03%2016-48-17.png)
+
+</details>
+
+
+<details>
+<summary> Spice Simulation : Lab 2b </summary>
+
+```plaintext
+ngspice <name: day2_nfet_idvgs_L015_W039.spice>
+plot -<name: vdd#branch>
+```
+
+
+![](images/day%2011/2.png)
+
+</details>
+
+
+
