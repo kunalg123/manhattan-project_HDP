@@ -1980,5 +1980,67 @@ plot -<name: vdd#branch>
 
 </details>
 
+### Day 12
+
+<details>
+<summary> Summary </summary>
+
+Here we are going to learn some more about the mos charactersitcs: Swtiching threshold and applications of it used in STA.
+
+</details>
+
+
+<details>
+<summary> Theory</summary>
+
+
+![](images/day12/Day12%20_230904_183541_1.jpg)
+
+
+![](images/day12/Day12%20_230904_183541_2.jpg)
+
+
+![](images/day12/Day12%20_230904_183541_3.jpg)
+
+![](images/day12/Day12%20_230904_183541_4.jpg)
+
+![](images/day12/Day12%20_230904_183541_5.jpg)
+
+
+</details>
+
+<details>
+<summary> SPICE Simulation : Lab 3a </summary>
+
+
+```plaintext
+ngspice <name: day3_inv_vtc_Wp084_Wn036.spice>
+plot <name: out> vs <name: in>
+```
+
+
+![](images/day12/1.png)
+
+</details>
+
+<details>
+<summary> SPICE Simulation : Lab 3b </summary>
+
+
+```plaintext
+ngspice <name: day3_inv_tran_Wp084_Wn036.spice>
+plot <name: out> vs <name: time> <name: in>
+```
+
+
+![](images/day12/2.png)
+
+</details>
+
+
+
+
+
+
 
 
