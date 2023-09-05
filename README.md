@@ -2038,6 +2038,53 @@ plot <name: out> vs <name: time> <name: in>
 </details>
 
 
+### Day 13 
+
+<details>
+<summary> Summary </summary>
+
+Here we are going to learn some more about the CMOS Charactersitcs : Noise Margin
+</details>
+
+<details>
+<summary> Theory </summary>
+
+
+
+![](images/day13/Day%2013_230905_104715_1.jpg)
+
+
+![](images/day13/Day%2013_230905_104715_2.jpg)
+
+
+![](images/day13/Day%2013_230905_104715_3.jpg)
+
+
+![](images/day13/Day%2013_230905_104715_4.jpg)
+
+</details>
+
+<details>
+<summary> SPICE Simulation : Lab 4 </summary>
+
+```plaintext
+ngspice <name: day4_inv_noisemargin_wp1_wn036.spice>
+plot <name: out> vs <name: in>
+```
+
+
+![](images/day13/1.png)
+
+Here Noise Margin low is 0.63 V and Noise Margin High is 0.71 V
+
+</details>
+
+
+
+
+
+
+
 
 
 
