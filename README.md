@@ -2080,6 +2080,83 @@ Here Noise Margin low is 0.63 V and Noise Margin High is 0.71 V
 </details>
 
 
+### Day 14
+
+<details>
+<summary> Summary </summary>
+
+Here we are going to learn CMOS charactersitcs : Supply Variation , Device Variation like process variation and gate oxide variation and its effects .
+
+</details>
+
+<details>
+<summary> Theory </summary>
+
+
+![](images/day14/Day%2014_230906_112102_1.jpg)
+
+![](images/day14/Day%2014_230906_112102_2.jpg)
+
+
+![](images/day14/Day%2014_230906_112102_3.jpg)
+
+
+![](images/day14/Day%2014_230906_112102_4.jpg)
+
+
+![](images/day14/Day%2014_230906_112102_5.jpg)
+
+</details>
+
+<details>
+<summary> SPICE Simulation: Lab 5a </summary>
+
+```plaintext
+ngspice <name: day5_inv_supplyvariation_Wp1_Wn036.spice>
+```
+
+
+![](images/day14/1.png)
+
+
+![](images/day14/2.png)
+
+For 1.8 v Gain is |(1.75-0.11/0.71-0.97)| = 1.65/0.26 = 6.33  
+
+For 0.8 v Gain is |(0.77-0.02)/(0.42-0.50)| =
+0.75/0.08 = 9.375
+
+Here we can observe that in lower nodes decrease in supply voltage leads to increase in Gain but performance decreases.
+
+</details>
+
+
+<details>
+<summary> SPICE Simulation: Lab 5b </summary>
+
+```plaintext
+ngspice <name: day5_inv_devicevariation_wp7_wn042.spice>
+plot <name: out> vs <name: in>
+```
+
+![](images/day14/3.png)
+
+
+![](images/day14/4.png)
+
+Even though their is a larger varaition in the device that is width changes due to process variation but their is less impact on the saturation voltage point . Ideally 0.9 v is Vsat but now its 0.989 v . 
+
+We can conclude that CMOS is robust.
+
+</details>
+
+
+
+
+
+
+
+
 
 
 
