@@ -2292,7 +2292,9 @@ Below are the findings of the results.
 ![](images/day16/timngchart.jpg)
 
 
+
 ![](images/day16/1.png)
+
 
 here we can observe at the ss ,at lowest temperature and lowest voltage we can observe the worst case of delay which is the worst PVT corner Combination.
 
