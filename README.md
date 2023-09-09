@@ -1793,7 +1793,7 @@ set_clock_uncertainty 0.1 [get_clocks clk1]
 set_input_transition -max 0.4 [get_ports sequence_in]
 set_input_transition -min 0.2 [get_ports sequence_in]
 set_input_transition -max 0.4 [get_ports reset]
-set_input_transition -max 0.2 [get_ports reset]
+set_input_transition -min 0.2 [get_ports reset]
 set_input_delay -max 3 -clock  clk1  [get_ports sequence_in]
 set_input_delay -min 1 -clock  clk1  [get_ports sequence_in]
 set_input_delay -max 3 -clock clk1   [get_ports reset]
@@ -2149,6 +2149,164 @@ Even though their is a larger varaition in the device that is width changes due 
 We can conclude that CMOS is robust.
 
 </details>
+
+### Day 15
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to learn about the PVT Corner their imapct on delay and performance.
+
+</details>
+
+<details>
+<summary> Theory  </summary>
+
+PVT:
+PVT is the Process, Voltage, and Temperature. In order to make our chip to work after fabrication in all the possible conditions, we simulate it at different corners of process, voltage, and temperature. These conditions are called corners. All these three parameters directly affect the delay of the cell.
+
+Process:
+
+There are millions of transistors on the single-chip as we are going to lower nodes and all the transistors in a chip cannot have the same properties. Process variation is the deviation in parameters of the transistor during the fabrication.
+
+During manufacturing a die, the area at the center and at the boundary will have different process variations. This happens because layers that will be getting fabricated cannot be uniform all over the die.
+
+Below are a few important factors which can cause the process variation;
+
+1. Oxide thickness variation
+2. Dopant and mobility fluctuation
+3. Transistor width
+4. RC Variation
+5. channel length
+6. doping concentration,
+7. metal thickness
+8. impurity concentration densities
+9. diffusion depths
+10. imperfections in the manufacturing process like mask print, etching
+
+
+![](images/day16/process.JPG)
+
+Voltage:
+
+
+
+As we are going to the lower nodes the supply voltage for a chip is also going to less. Let’s say the chip is operating at 1.2V. So, there are chances that at certain instances of time this voltage may vary. It can go to 1.5V or 0.8V. To take care of this scenario, we consider voltage variation.
+
+There are multiple reasons for voltage variation.
+
+1. IR drop is caused by the current flow over the power grid network. 
+2. Supply noise caused by parasitic inductance in combination with resistance and capacitance. when the current is flowing through parasitic inductance (L) it will causes the voltage bounce.
+
+
+
+![](images/day16/voltage.JPG)
+
+Temperature:
+
+
+The transistor density is not uniform throughout the chip. Some regions of the chip have higher density and higher switching, resulting in higher power dissipation and Some regions of the chip have lower density and lower switching, resulting in lower power dissipation Hence the junction temperature at these regions may be higher or lower depending upon the density of transistors. Because of the variation in temperature across the chip, it introduces different delays across all the transistors.
+
+For Technology node below 65nm there exsists "temperature inversion" where delay increases in decrease in temperature.
+
+![](images/day16/temp.JPG)
+
+
+```plaintext
+Best case: fast process, highest voltage and lowest temperature
+
+Worst case: slow process, lowest voltage and highest temperature
+```
+
+</details>
+
+
+### Day 16 
+
+Post Synthesis for my Design
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to perform post Synthesis STA for different corner say ss,ff,tt and find the changes in WNS(Worst Negative Slack), WHS(Worst Hold Slack), TNS(Total Negative Slack).
+
+The library files are derived from https://github.com/Geetima2021/vsdpcvrd
+
+There are 
+* 1 tt (typical typical) Library
+* 5 ff (fast fast) Library
+* 7 ss (slow slow) Library
+
+with different combinations of Voltage and Temperature.
+
+</details>
+
+<details>
+<summary> Constraints</summary>
+
+Here I am using the same constraints which I used for first STA.
+
+
+```plaintext
+#clock constraints
+create_clock -name clk1 -period 10 [get_ports clock] 
+set_clock_latency -source 1 [get_clocks clk1]
+set_clock_latency 2 [get_clocks clk1]
+set_clock_uncertainty 0.6 [get_clocks clk1]
+set_clock_uncertainty 0.1 [get_clocks clk1]
+
+#input constraints
+#set_driving_cell -lib_cell sky130_fd_sc_hd__buf_4 [all_inputs]
+set_input_transition -max 0.4 [get_ports sequence_in]
+set_input_transition -min 0.2 [get_ports sequence_in]
+set_input_transition -max 0.4 [get_ports reset]
+set_input_transition -min 0.2 [get_ports reset]
+set_input_delay -max 3 -clock  clk1  [get_ports sequence_in]
+set_input_delay -min 1 -clock  clk1  [get_ports sequence_in]
+set_input_delay -max 3 -clock clk1   [get_ports reset]
+set_input_delay -min 1 -clock  clk1 [get_ports reset]
+
+#output constraints 
+set_output_delay -max 3 -clock clk1 [get_ports detector_out]
+set_output_delay -min 1  -clock  clk1 [get_ports detector_out]
+set_load  -max 0.2 [get_ports detector_out]
+set_load -min 0.05 [get_ports detector_out]
+```
+</details>
+
+
+<details>
+<summary> Execution</summary>
+
+I written three different scripts for sta anaysis ran in OpenSTA tool to analyse the outputs.
+
+```plaintext
+sta manhattanscript_tt.tcl
+sta manhattanscript_ff.tcl
+sta manhattanscript_ss.tcl
+```
+Below are the findings of the results.
+
+
+
+![](images/day16/timngchart.jpg)
+
+
+![](images/day16/1.png)
+
+here we can observe at the ss ,at lowest temperature and lowest voltage we can observe the worst case of delay which is the worst PVT corner Combination.
+
+</details>
+
+
+
+
+
+
+
+
+
+
 
 
 
