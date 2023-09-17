@@ -2301,6 +2301,149 @@ here we can observe at the ss ,at lowest temperature and lowest voltage we can o
 </details>
 
 
+### Day 17 
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to lesrn the automated flow of PnR (Placement and Routing) using openlane script which comprises of different open source tools combined to together a single script.
+
+A ASIC Design consists of pdk , RTL , EDA Tools to be open sourced to create a community intiaited by eFabless.
+
+</details>
+
+<details>
+<summary> Theory </summary>
+
+
+![](images/day17/Day17_230916_135214_1.jpg)
+
+
+![](images/day17/Day17_230916_135214_2.jpg)
+
+
+![](images/day17/Day17_230916_135214_3.jpg)
+
+
+![](images/day17/Day17_230916_135214_4.jpg)
+
+
+![](images/day17/Day17_230916_135214_5.jpg)
+
+
+![](images/day17/Day17_230916_135214_6.jpg)
+
+
+![](images/day17/1.png)
+
+
+![](images/day17/2.png)
+
+</details>
+
+<details>
+<summary> Installation of OpenLane </summary>
+
+```plaintext
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install -y build-essential python3 python3-venv python3-pip make git
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo reboot
+```
+```plaintext
+git --version
+docker --version
+python3 --version
+python3 -m pip --version
+make --version
+python3 -m venv -h
+```
+```plaintext
+cd $HOME
+git clone https://github.com/The-OpenROAD-Project/OpenLane
+cd OpenLane
+make
+make test
+```
+</details>
+
+<details>
+<summary> Tutorial : Picorv32a (Synthesis) </summary>
+
+```plaintext
+make mount
+./flow.tcl -interactive
+package require openlane 0.9
+```
+
+
+```plaintext
+run_synthesis
+```
+
+
+![](images/day17/3.png)
+
+
+![](images/day17/4.png)
+
+```plaintext
+Flop ratio = # of D Flipflops / Total # of cells
+dfxtp_2 = 1596,
+Number of cells = 10206,
+Flop ratio = 1596/10206 = 0.1537 = 15.37%
+```
+	
+	
+![](images/day17/7.png)
+
+```plaintext
+============================================================================
+======================= Typical Corner ===================================
+
+Startpoint: _17318_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _17318_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                  0.15    0.00    0.00 ^ _17318_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                  0.07    0.35    0.35 ^ _17318_/Q (sky130_fd_sc_hd__dfxtp_2)
+     3    0.01                           count_instr[63] (net)
+                  0.07    0.00    0.35 ^ _13104_/A1 (sky130_fd_sc_hd__a21oi_2)
+                  0.02    0.04    0.40 v _13104_/Y (sky130_fd_sc_hd__a21oi_2)
+     1    0.00                           _00644_ (net)
+                  0.02    0.00    0.40 v _17318_/D (sky130_fd_sc_hd__dfxtp_2)
+                                  0.40   data arrival time
+
+                  0.15    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          0.25    0.25   clock uncertainty
+                          0.00    0.25   clock reconvergence pessimism
+                                  0.25 ^ _17318_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.01    0.24   library hold time
+                                  0.24   data required time
+-----------------------------------------------------------------------------
+                                  0.24   data required time
+                                 -0.40   data arrival time
+-----------------------------------------------------------------------------
+                                  0.16   slack (MET)
+```
+
+
+</details>
+
 
 
 
