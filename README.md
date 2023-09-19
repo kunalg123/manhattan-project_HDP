@@ -2445,6 +2445,143 @@ Fanout     Cap    Slew   Delay    Time   Description
 </details>
 
 
+### Day 18
+
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to learn the basics of Floorplanning and Placement Stage and implement this in the openlane flow for picorv32a design.
+
+</details>
+
+
+<details>
+<summary> Theory </summary>
+
+
+![](images/day18/Day18_230919_161103_1.jpg)
+
+
+![](images/day18/Day18_230919_161103_2.jpg)
+
+
+![](images/day18/Day18_230919_161103_3.jpg)
+
+
+![](images/day18/Day18_230919_161103_4.jpg)
+
+
+![](images/day18/Day18_230919_161103_5.jpg)
+
+
+![](images/day18/Day18_230919_161103_6.jpg)
+
+
+![](images/day18/Day18_230919_161103_7.jpg)
+
+
+![](images/day18/Day18_230919_161103_8.jpg)
+
+
+![](images/day18/Day18_230919_161103_9.jpg)
+
+
+![](images/day18/Day18_230919_161103_10.jpg)
+
+
+![](images/day18/Day18_230919_161103_11.jpg)
+
+
+![](images/day18/Day18_230919_161103_12.jpg)
+
+
+![](images/day18/Day18_230919_161103_13.jpg)
+
+
+![](images/day18/Day18_230919_161103_14.jpg)
+
+
+![](images/day18/Day18_230919_161103_15.jpg)
+
+
+![](images/day18/Day18_230919_161103_16.jpg)
+
+</details>
+
+<details>
+<summary> Tutorial : Picorv32a (Floorplanning , Placement) </summary>
+
+
+
+Follow these commands to get the floorplanning.
+
+```plaintext
+run_floorplan
+```
+
+To view the floorplan use magic tool and follow these commands
+
+```plaintext
+magic -T $PDK_ROOT/$PDK/libs.tech/magic/sky130.tech
+```
+
+
+and in the tool window type these commands
+
+```plaintext
+lef read ../../tmp/merged.min.lef
+def read picorv32.def
+```
+
+
+![](images/day18/1.png)
+
+
+![](images/day18/2.png)
+
+Here the cells of the netlist are in bottom left corner of core area that means they are placed inside the core area. Next step is to do the placement step arrange these cells in the core area.
+
+To do the placement type these commands
+
+```plaintext
+run_placement
+```
+
+To view the placement view use magic tool.
+
+```plaintext
+magic -T $PDK_ROOT/$PDK/libs.tech/magic/sky130.tech
+```
+
+```plaintext
+lef read ../../tmp/merged.min.lef
+def read picorv32.def
+```
+
+
+![](images/day18/3.png)
+
+
+![](images/day18/4.png)
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
