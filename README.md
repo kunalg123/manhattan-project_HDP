@@ -2568,6 +2568,170 @@ def read picorv32.def
 </details>
 
 
+### Day 19
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to learn the basics of cmos level charactersitcs and the drc checking using magic tool. 
+
+</details>
+
+<details>
+<summary> Theory </summary>
+
+
+![](images/day19/Day%2019_230920_161829_1.jpg)
+
+![](images/day19/Day%2019_230920_161829_2.jpg)
+
+
+![](images/day19/16mask.png)
+
+
+</details>
+
+<details>
+<summary> magic: inverter </summary>
+
+```plaintext
+git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+```
+
+```plaintext
+magic -T sky130A.tech sky130_inv.mag &
+```
+
+
+![](images/day19/1.png)
+
+spice extraction steps
+
+```plaintext
+extract all
+ext2spice cthresh 0 rethresh 0
+ext2spice
+```
+
+output of spice netlist
+
+```plaintext
+.include ./libs/pshort.lib
+.include ./libs/nshort.lib
+VDD VPWR 0 3.3V
+VSS VGND 0 0V
+Va A VGND PULSE(0V 3.3V 0 0.1ns 0.1ns 2ns 4ns)
+.tran 1n 20n
+.control 
+run
+.endc
+.end
+```
+
+
+![](images/day19/2.png)
+
+convert the ext file to spice file and use ngspice tool to run the simulation.
+
+```plaintext
+ngspice sky130_inv.spice
+plot <output: y> vs time <input: a>
+```
+
+
+![](images/day19/3.png)
+
+![](images/day19/4.png)
+
+```plaintext
+Rise transition = (2.1957e-9 - 2.15099e-9) = 44.71 ps
+Fall transition = (4.06461e-9 - 4.03953e-9) = 25.08 ps
+Cell rise delay = (2.17613e-9 - 2.15e-9) = 26.13 ps
+Cell fall delay = (4.05241e-9 - 4.04991e-9) = 25.00 ps
+```
+
+<details>
+<summary> drc checks</summary>
+
+```plaintext
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+tar xfz drc_tests.tgz
+```
+
+```plaintext
+magic -d XR
+```
+
+
+![](images/day19/5.png)
+
+```plaintext
+load poly.mag
+```
+
+
+![](images/day19/6.png)
+
+
+![](images/day19/7.png)
+
+```plaintext
+tech load sky130A.tech
+drc check
+```
+
+
+![](images/day19/8.png)
+
+
+
+![](images/day19/9.png)
+
+```plaintext
+tech load sky130A.tech
+drc check
+```
+
+
+![](images/day19/10.png)
+
+
+```plaintext
+load nwell.mag
+```
+
+
+![](images/day19/11.png)
+
+
+![](images/day19/12.png)
+
+```plaintext
+tech load sky130A.tech
+drc check
+drc style drc(full)
+drc check
+```
+
+![](images/day19/13.png)
+
+
+![](images/day19/14.png)
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
