@@ -2649,7 +2649,7 @@ Fall transition = (4.06461e-9 - 4.03953e-9) = 25.08 ps
 Cell rise delay = (2.17613e-9 - 2.15e-9) = 26.13 ps
 Cell fall delay = (4.05241e-9 - 4.04991e-9) = 25.00 ps
 ```
-
+</details>
 <details>
 <summary> drc checks</summary>
 
