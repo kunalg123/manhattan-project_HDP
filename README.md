@@ -2722,6 +2722,112 @@ drc check
 
 
 
+### Day 20
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to learn the lef writing , integrating the custom cells to the exisisting design, post cts and pre cts of picorv32a design.
+
+</details>
+
+<details>
+<summary> Theory  </summary>
+
+
+![](images/day20/Day20_230921_233326_1.jpg)
+
+
+</details>
+
+
+<details>
+<summary> Openlane: Lef  Extraction </summary>
+
+```plaintext
+vi /home/sai/Desktop/open_pdks/sky130/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info
+```
+
+![](images/day20/2.png)
+
+```plaintext
+grid 0.46um 0.34um 0.23um 0.17um
+save sky130_vsdinv.mag
+```
+
+```plaintext
+magic -T sky130A.tech sky130_vsdinv.mag &
+```
+
+```plaintext
+lef write
+```
+
+
+![](images/day20/3.png)
+
+```plaintext
+cp /home/sai/OpenLane/vsdstdcelldesign/sky130_vsdinv.lef . 
+cp /home/sai/OpenLane/vsdstdcelldesign/libs/sky130_fd_sc_hd__typical.lib .
+cp /home/sai/OpenLane/vsdstdcelldesign/libs/sky130_fd_sc_hd__fast.lib .
+cp /home/sai/OpenLane/vsdstdcelldesign/libs/sky130_fd_sc_hd__slow.lib .
+```
+
+save the lib , lef file to openlane designs folder to integrate the standard cells to the designs.
+
+then modify the config.json in the design folder to run with the updated changes.
+
+
+![](images/day20/4.png)
+
+use the following commands to run and view the design 
+
+```plaintext
+exit
+prep -design picorv32a
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
+run_floorplan
+run_placement
+```
+
+```plaintext
+magic read -T /home/sai/Desktop/open_pdks/sky130/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.max.lef def read picorv32.def &
+```
+
+
+![](images/day20/1.png)
+
+here we can see vsdinv cell is added to picorv32a design this confirm the flexibililty to create the custom libs and added to current design.
+
+
+</details>
+
+<details>
+<summary> Tutorial:Picorv32a (CTS)</summary>
+
+```plaintext
+run_cts
+```
+
+use the following command to run the cts in tool and output generates the reports can found in the log directory.
+
+
+
+![](images/day20/6.png)
+
+
+![](images/day20/7.png)
+
+
+![](images/day20/8.png)
+
+
+![](images/day20/9.png)
+
+</details>
+
 
 
 
