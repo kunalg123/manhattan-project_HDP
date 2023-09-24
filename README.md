@@ -76,6 +76,19 @@ sudo make install
 
 ![](images/day10/2.png)
 
+#### <u>magic</u>
+```plaintext
+sudo apt-get install m4
+sudo apt-get install tcsh
+sudo apt-get install csh
+sudo apt-get install libx11-dev
+sudo apt-get install tcl-dev tk-dev
+sudo apt-get install libcairo2-dev
+sudo apt-get install mesa-common-dev libglu1-mesa-dev
+sudo apt-get install libncurses-dev
+```
+
+![](images/magic.png)
 
 
 &nbsp;
@@ -2737,6 +2750,23 @@ Here we are going to learn the lef writing , integrating the custom cells to the
 
 ![](images/day20/Day20_230921_233326_1.jpg)
 
+![](images/day20/Day20_230922_153153_2.jpg)
+
+
+![](images/day20/Day20_230922_153153_3.jpg)
+
+
+![](images/day20/Day20_230922_153153_4.jpg)
+
+
+![](images/day20/Day20_230922_153153_5.jpg)
+
+
+![](images/day20/Day20_230922_153153_6.jpg)
+
+
+![](images/day20/Day20_230922_153153_7.jpg)
+
 
 </details>
 
@@ -2827,6 +2857,447 @@ use the following command to run the cts in tool and output generates the report
 ![](images/day20/9.png)
 
 </details>
+
+### Day 21
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to learn routing concepts and appply it in the openlane flow and learn about triton route Tool and analyse the outputs .
+
+</details>
+
+<details>
+<summary> Theory </summary>
+
+
+![](images/day21/Day%2021_230922_165631_1.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_2.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_3.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_4.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_5.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_6.jpg)
+
+
+![](images/day21/Day%2021_230922_165631_7.jpg)
+
+![](images/day21/Day%2021_230922_165631_8.jpg)
+
+![](images/day21/Day%2021_230922_165631_9.jpg)
+
+</details>
+
+<details>
+<summary> Tutorial:Picorv32a (PDN and Routing)</summary>
+
+
+```plaintext
+gen_pdn
+echo $::env(CURRENT_DEF)
+```
+
+```plaintext
+run_routing
+```
+
+
+![](images/day21/1.png)
+
+
+![](images/day21/2.png)
+
+```plaintext
+run_parasitics_sta
+run_irdrop_report
+run_magic
+run_magic_spice_export
+run_lvs
+run_magic_drc
+run_antenna_check
+run_erc
+```
+
+
+![](images/day21/3.png)
+
+
+![](images/day21/4.png)
+
+This is final flow and layout after the routing stage.
+
+</details>
+
+
+
+### Day 22
+
+
+<details>
+<summary> Summary  </summary>
+
+Here we are going to integrate my design to the Openlane flow and running the script to perform from RTLTOGDS and output is integrate to caravel core and given to tapeout shuttle.
+
+</details>
+
+<details>
+<summary> Synthesis:ManhattanDetector</summary>
+
+To avoid error in PDN stage we need to use the following command in the json file.
+
+```plaintext
+"FP_PDN_AUTO_ADJUST": 0
+```
+```plaintext
+make mount
+./flow.tcl -interactive
+prep -design manhattandetector
+
+run_synthesis
+```
+
+![](images/day%2022/1.png)
+
+```plaintext
+Here FlipFlop Ratio = no of filpflops/ Total number of cells
+
+4/21 = 0.190 * 100 = 19 %
+```
+
+The sta reports are also generated in this stage and constraints provided to tool is similar which we have used eariler in opensta tool and we got similar reports using this tool.
+
+
+![](images/day%2022/2.png)
+
+
+![](images/day%2022/3.png)
+
+
+
+![](images/day%2022/4.png)
+
+
+![](images/day%2022/5.png)
+
+![](images/day%2022/6.png)
+![](images/day%2022/7.png)
+
+
+</details>
+
+<details>
+<summary> Floorplan:ManhattanDetector</summary>
+
+```plaintext
+run_floorplan
+```
+
+To view the floorplan in magic use the following commands
+
+```plaintext
+magic read -T /home/sai/Desktop/open_pdks/sky130/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.min.lef def read manhattandetector.def &
+```
+
+
+![](images/day%2022/8.png)
+
+![](images/day%2022/9.png)
+
+</details>
+
+<details>
+<summary> Placement:ManhattanDetector</summary>
+
+```plaintext
+run_placement
+```
+To view the placement in magic use the following commands 
+
+```plaintext
+magic read -T /home/sai/Desktop/open_pdks/sky130/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.max.lef def read manhattandetector.def &
+```
+
+![](images/day%2022/10.png)
+
+![](images/day%2022/11.png)
+
+</details>
+
+<details>
+<summary> CTS:ManhattanDetector</summary>
+
+```plaintext
+run_cts
+```
+
+
+![](images/day%2022/12.png)
+
+![](images/day%2022/13.png)
+
+
+![](images/day%2022/14.png)
+
+
+![](images/day%2022/15.png)
+
+
+![](images/day%2022/16.png)
+
+
+![](images/day%2022/17.png)
+
+</details>
+
+<details>
+<summary> Routing:ManhattanDetector</summary>
+
+```plaintext
+gen_pdn
+run_routing
+```
+
+
+![](images/day%2022/18.png)
+
+![](images/day%2022/19.png)
+
+
+![](images/day%2022/20.png)
+
+
+![](images/day%2022/21.png)
+
+</details>
+
+<details>
+<summary> GDSII:ManhattanDetector</summary>
+
+```plaintext
+run_parasitics_sta
+run_irdrop_report
+run_magic
+run_magic_spice_export
+run_lvs
+run_magic_drc
+run_antenna_check
+run_erc
+```
+
+
+To view final layout use the following command
+
+```plaintext
+magic
+```
+
+In GUI window select file > open > .mag file  
+
+
+
+![](images/day%2022/23.png)
+
+
+![](images/day%2022/24.png)
+
+
+![](images/day%2022/27.png)
+
+</details>
+
+<details>
+<summary> Non Interactive mode :ManhattanDetector</summary>
+
+
+```plaintext
+OpenLane Container (7e5a2e9):/openlane$ ./flow.tcl -design manahattandetector
+OpenLane 7e5a2e9fb274c0a100b4859a927adce7089455ff
+All rights reserved. (c) 2020-2022 Efabless Corporation and contributors.
+Available under the Apache License, version 2.0. See the LICENSE file for more details.
+
+[INFO]: Using configuration in 'designs/manahattandetector/config.json'...
+[INFO]: PDK Root: /home/sai/.volare
+[INFO]: Process Design Kit: sky130A
+[INFO]: Standard Cell Library: sky130_fd_sc_hd
+[INFO]: Optimization Standard Cell Library: sky130_fd_sc_hd
+[INFO]: Run Directory: /openlane/designs/manahattandetector/runs/RUN_2023.09.23_22.57.58
+[INFO]: Saving runtime environment...
+[INFO]: Preparing LEF files for the nom corner...
+[INFO]: Preparing LEF files for the min corner...
+[INFO]: Preparing LEF files for the max corner...
+[INFO]: Running linter (Verilator) (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/synthesis/linter.log)...
+[INFO]: 0 errors found by linter
+[WARNING]: 3 warnings found by linter
+[STEP 1]
+[INFO]: Running Synthesis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/synthesis/1-synthesis.log)...
+[STEP 2]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/synthesis/2-sta.log)...
+[STEP 3]
+[INFO]: Running Initial Floorplanning (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/floorplan/3-initial_fp.log)...
+[INFO]: Floorplanned with width 30.36 and height 29.92.
+[STEP 4]
+[INFO]: Running IO Placement...
+[STEP 5]
+[INFO]: Running Global Placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/5-global.log)...
+[STEP 6]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/6-gpl_sta.log)...
+[STEP 7]
+[INFO]: Running basic macro placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/7-basic_mp.log)...
+[STEP 8]
+[INFO]: Running Tap/Decap Insertion (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/floorplan/8-tap.log)...
+[INFO]: Power planning with power {VPWR} and ground {VGND}...
+[STEP 9]
+[INFO]: Generating PDN (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/floorplan/9-pdn.log)...
+[STEP 10]
+[INFO]: Running Global Placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/10-global.log)...
+[STEP 11]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/11-gpl_sta.log)...
+[STEP 12]
+[INFO]: Running Placement Resizer Design Optimizations (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/12-resizer.log)...
+[STEP 13]
+[INFO]: Running Detailed Placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/13-detailed.log)...
+[STEP 14]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/placement/14-dpl_sta.log)...
+[STEP 15]
+[INFO]: Running Clock Tree Synthesis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/cts/15-cts.log)...
+[STEP 16]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/cts/16-cts_sta.log)...
+[STEP 17]
+[INFO]: Running Placement Resizer Timing Optimizations (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/cts/17-resizer.log)...
+[STEP 18]
+[INFO]: Running Global Routing Resizer Design Optimizations (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/18-resizer_design.log)...
+[STEP 19]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/19-rsz_design_sta.log)...
+[STEP 20]
+[INFO]: Running Global Routing Resizer Timing Optimizations (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/20-resizer_timing.log)...
+[STEP 21]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/21-rsz_timing_sta.log)...
+[STEP 22]
+[INFO]: Running I/O Diode Insertion (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/22-io_diodes.log)...
+[STEP 23]
+[INFO]: Running Detailed Placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/23-io_diode_legalization.log)...
+[STEP 24]
+[INFO]: Running Heuristic Diode Insertion (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/24-diodes.log)...
+[STEP 25]
+[INFO]: Running Detailed Placement (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/25-diode_legalization.log)...
+[STEP 26]
+[INFO]: Running Global Routing (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/26-global.log)...
+[INFO]: Starting OpenROAD Antenna Repair Iterations...
+[STEP 27]
+[INFO]: Writing Verilog (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/26-global_write_netlist.log)...
+[STEP 28]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/28-grt_sta.log)...
+[STEP 29]
+[INFO]: Running Fill Insertion (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/29-fill.log)...
+[STEP 30]
+[INFO]: Running Detailed Routing (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/30-detailed.log)...
+[INFO]: No DRC violations after detailed routing.
+[STEP 31]
+[INFO]: Checking Wire Lengths (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/routing/31-wire_lengths.log)...
+[STEP 32]
+[INFO]: Running SPEF Extraction at the min process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/32-parasitics_extraction.min.log)...
+[STEP 33]
+[INFO]: Running Multi-Corner Static Timing Analysis at the min process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/33-rcx_mcsta.min.log)...
+[STEP 34]
+[INFO]: Running SPEF Extraction at the max process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/34-parasitics_extraction.max.log)...
+[STEP 35]
+[INFO]: Running Multi-Corner Static Timing Analysis at the max process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/35-rcx_mcsta.max.log)...
+[STEP 36]
+[INFO]: Running SPEF Extraction at the nom process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/36-parasitics_extraction.nom.log)...
+[STEP 37]
+[INFO]: Running Multi-Corner Static Timing Analysis at the nom process corner (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/37-rcx_mcsta.nom.log)...
+[WARNING]: Module sky130_fd_sc_hd__tapvpwrvgnd_1 blackboxed during sta
+[WARNING]: Module sky130_ef_sc_hd__decap_12 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_1 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_2 blackboxed during sta
+[STEP 38]
+[INFO]: Creating IR Drop Report (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/38-irdrop.log)...
+[WARNING]: VSRC_LOC_FILES is not defined. The IR drop analysis will run, but the values may be inaccurate.
+[STEP 39]
+[INFO]: Running Magic to generate various views...
+[INFO]: Streaming out GDSII with Magic (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/39-gdsii.log)...
+[INFO]: Generating MAGLEF views...
+[INFO]: Generating lef with Magic (/openlane/designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/39-lef.log)...
+[STEP 40]
+[INFO]: Streaming out GDSII with KLayout (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/40-gdsii-klayout.log)...
+[STEP 41]
+[INFO]: Running XOR on the layouts using KLayout (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/41-xor.log)...
+[INFO]: No XOR differences between KLayout and Magic gds.
+[STEP 42]
+[INFO]: Running Magic Spice Export from LEF (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/42-spice.log)...
+[STEP 43]
+[INFO]: Writing Powered Verilog (logs: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/43-write_powered_def.log, designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/43-write_powered_verilog.log)...
+[STEP 44]
+[INFO]: Writing Verilog (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/43-write_powered_verilog.log)...
+[STEP 45]
+[INFO]: Running LVS (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/45-lvs.lef.log)...
+[STEP 46]
+[INFO]: Running Magic DRC (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/46-drc.log)...
+[INFO]: Converting Magic DRC database to various tool-readable formats...
+[INFO]: No DRC violations after GDS streaming out.
+[STEP 47]
+[INFO]: Running OpenROAD Antenna Rule Checker (log: designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/logs/signoff/47-arc.log)...
+[INFO]: Saving current set of views in 'designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/results/final'...
+[INFO]: Saving runtime environment...
+[INFO]: Generating final set of reports...
+[INFO]: Created manufacturability report at 'designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/reports/manufacturability.rpt'.
+[INFO]: Created metrics report at 'designs/manahattandetector/runs/RUN_2023.09.23_22.57.58/reports/metrics.csv'.
+[INFO]: There are no max slew, max fanout or max capacitance violations in the design at the Typical corner.
+[INFO]: There are no hold violations in the design at the Typical corner.
+[INFO]: There are no setup violations in the design at the Typical corner.
+[SUCCESS]: Flow complete.
+[INFO]: Note that the following warnings have been generated:
+[WARNING]: 3 warnings found by linter
+[WARNING]: Module sky130_fd_sc_hd__tapvpwrvgnd_1 blackboxed during sta
+[WARNING]: Module sky130_ef_sc_hd__decap_12 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_1 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_2 blackboxed during sta
+[WARNING]: VSRC_LOC_FILES is not defined. The IR drop analysis will run, but the values may be inaccurate.
+```
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

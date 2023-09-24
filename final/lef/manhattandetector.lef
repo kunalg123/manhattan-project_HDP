@@ -1,0 +1,81 @@
+VERSION 5.7 ;
+  NOWIREEXTENSIONATPIN ON ;
+  DIVIDERCHAR "/" ;
+  BUSBITCHARS "[]" ;
+MACRO manhattandetector
+  CLASS BLOCK ;
+  FOREIGN manhattandetector ;
+  ORIGIN 0.000 0.000 ;
+  SIZE 41.715 BY 52.435 ;
+  PIN VGND
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 24.340 10.640 25.940 41.040 ;
+    END
+  END VGND
+  PIN VPWR
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 21.040 10.640 22.640 41.040 ;
+    END
+  END VPWR
+  PIN clock
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.852000 ;
+    ANTENNADIFFAREA 0.434700 ;
+    PORT
+      LAYER met2 ;
+        RECT 0.090 0.000 0.370 4.000 ;
+    END
+  END clock
+  PIN detector_out
+    DIRECTION OUTPUT TRISTATE ;
+    USE SIGNAL ;
+    ANTENNADIFFAREA 2.673000 ;
+    PORT
+      LAYER met3 ;
+        RECT 0.000 47.640 4.000 48.240 ;
+    END
+  END detector_out
+  PIN reset
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.213000 ;
+    ANTENNADIFFAREA 0.434700 ;
+    PORT
+      LAYER met2 ;
+        RECT 38.730 48.435 39.010 52.435 ;
+    END
+  END reset
+  PIN sequence_in
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.126000 ;
+    ANTENNADIFFAREA 0.434700 ;
+    PORT
+      LAYER met3 ;
+        RECT 37.715 3.440 41.715 4.040 ;
+    END
+  END sequence_in
+  OBS
+      LAYER li1 ;
+        RECT 5.520 10.795 35.880 40.885 ;
+      LAYER met1 ;
+        RECT 0.070 10.640 39.030 41.040 ;
+      LAYER met2 ;
+        RECT 0.100 48.155 38.450 48.435 ;
+        RECT 0.100 4.280 39.000 48.155 ;
+        RECT 0.650 3.555 39.000 4.280 ;
+      LAYER met3 ;
+        RECT 4.400 47.240 37.715 48.105 ;
+        RECT 4.000 4.440 37.715 47.240 ;
+        RECT 4.000 3.575 37.315 4.440 ;
+  END
+END manhattandetector
+END LIBRARY
+

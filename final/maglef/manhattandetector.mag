@@ -1,0 +1,47 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1695510777
+<< obsli1 >>
+rect 1104 2159 7176 8177
+<< obsm1 >>
+rect 14 2128 7806 8208
+<< metal2 >>
+rect 7746 9687 7802 10487
+rect 18 0 74 800
+<< obsm2 >>
+rect 20 9631 7690 9687
+rect 20 856 7800 9631
+rect 130 711 7800 856
+<< metal3 >>
+rect 0 9528 800 9648
+rect 7543 688 8343 808
+<< obsm3 >>
+rect 880 9448 7543 9621
+rect 800 888 7543 9448
+rect 800 715 7463 888
+<< metal4 >>
+rect 4208 2128 4528 8208
+rect 4868 2128 5188 8208
+<< labels >>
+rlabel metal4 s 4868 2128 5188 8208 6 VGND
+port 1 nsew ground bidirectional
+rlabel metal4 s 4208 2128 4528 8208 6 VPWR
+port 2 nsew power bidirectional
+rlabel metal2 s 18 0 74 800 6 clock
+port 3 nsew signal input
+rlabel metal3 s 0 9528 800 9648 6 detector_out
+port 4 nsew signal output
+rlabel metal2 s 7746 9687 7802 10487 6 reset
+port 5 nsew signal input
+rlabel metal3 s 7543 688 8343 808 6 sequence_in
+port 6 nsew signal input
+<< properties >>
+string FIXED_BBOX 0 0 8343 10487
+string LEFclass BLOCK
+string LEFview TRUE
+string GDS_END 232418
+string GDS_FILE /openlane/designs/manhattandetector/runs/RUN_2023.09.23_23.08.54/results/signoff/manhattandetector.magic.gds
+string GDS_START 158546
+<< end >>
+
